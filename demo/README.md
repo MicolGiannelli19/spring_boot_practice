@@ -1,0 +1,1 @@
+This read me inculdes details on what the application does it should include details on how to connect to a postgres db

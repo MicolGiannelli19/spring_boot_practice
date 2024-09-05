@@ -1,0 +1,99 @@
+We will now structure  REST api 
+
+note: GET, POST, PUT, DELETE
+
+The decorator looking things are called annotations in Java methods, they serve to provide information to a java program
+
+note that mehtod declarations MUST have a return type
+
+
+We will now write the service layer, the service layer is responsible for the buisness logic
+
+look up  MVC (Model-View-Controller) architecture
+A controller is typically responsible for handling incoming HTTP requests, processing them (often with the help of services), and returning a response.
+
+reminder the keyword `final` indicates a constant
+
+not sure about a lot of the concepts related to dependacy injections 
+
+?? what is a sping bean ??
+A Spring Bean is an object that is managed by the Spring IoC (Inversion of Control) container. In the Spring Framework, the term "bean" refers to an object that is instantiated, assembled, and otherwise managed by Spring. Beans are the core building blocks of a Spring application, and the container is responsible for their lifecycle, including their creation, dependency injection, initialization, and eventual destruction.
+
+For the next section of the course we will look into the spring Data JPA
+
+
+the language introduced records, which are a special kind of class designed to hold immutable data
+
+A library called jackson is used to deal with json in java 
+
+# Equals method
+
+1. equals() Method
+
+- The equals() method is used to determine if two objects are meaningfully equivalent.
+- By default, the equals() method compares object references, meaning two objects are considered equal only if they are the same instance.
+- This behavior can be overridden to compare the content or state of objects rather than their memory addresses
+
+Here is an example 
+```java
+public class Person {
+    private String name;
+    private int age;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return age == person.age && name.equals(person.name);
+    }
+}
+```
+In this example the equals method compares `name` and  `age` to determine if two objects are equal
+### Note that when overwriting equals it is essential to overwrite hashcode so that two objects that are considered equal have the same Hash code
+### Concept of Hashcodes
+```java
+public class Person {
+    private String name;
+    private int age;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return age == person.age && name.equals(person.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age);
+    }
+}
+```
+# Databases
+JPA (jakarta persistence is a specification that allows the managment of relational databases)
+
+# Docker Volumes 
+
+- Docker volumes are ways of persisting the data generated and used by the docker container
+- They allow you to decouple the lifecycle of the data from the life cycle of the container
+- This allows you to maintain the data across container re-starts, upgrades and re-deployment
+- Named volumes are managed by Docker and can be referenced by a name. These volumes are stored in a specific location on the host filesystem (/var/lib/docker/volumes/ by default)
+- `host volumes` (also known as bind mounts) these map a specific directory in the container
+- Volumes typically perform better I/O operations then bind mounts because docker optimizes this
+
+# Other docker things I am reminding myself of 
+
+- Side note `docker prune` helps you remove containers, volumes, networks that are not currently being used freeing up disk space
+- The `Dockerfile` defines the steps to create an image
+- while `docker-compose.yml` orchestrates the running of multiple containers based on either pre-built images (like postgres:14.1 in your example) or images that are built from a Dockerfile.
+
+
+# Notes about using psql.app rather then a docker container
+Less Isolated Environment:
+
+- Your PostgreSQL instance runs directly on your host system,
+which means it shares the system environment.
+This can lead to issues with version conflicts if you need to run different versions of PostgreSQL for different projects.
+- 
