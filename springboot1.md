@@ -15,6 +15,9 @@ A controller is typically responsible for handling incoming HTTP requests, proce
 reminder the keyword `final` indicates a constant
 
 not sure about a lot of the concepts related to dependacy injections 
+# Dependency Injection
+- I looked at the car engine example
+- Include the dependency being passed into the constructor so Car is not tightly coupled to engine 
 
 ?? what is a sping bean ??
 A Spring Bean is an object that is managed by the Spring IoC (Inversion of Control) container. In the Spring Framework, the term "bean" refers to an object that is instantiated, assembled, and otherwise managed by Spring. Beans are the core building blocks of a Spring application, and the container is responsible for their lifecycle, including their creation, dependency injection, initialization, and eventual destruction.
@@ -125,3 +128,6 @@ This can lead to issues with version conflicts if you need to run different vers
 
 
 ? What is the diffrence between an interface and an abstract class in Java
+
+
+get a better understanding of how microservices work 
