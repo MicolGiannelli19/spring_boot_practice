@@ -96,4 +96,32 @@ Less Isolated Environment:
 - Your PostgreSQL instance runs directly on your host system,
 which means it shares the system environment.
 This can lead to issues with version conflicts if you need to run different versions of PostgreSQL for different projects.
-- 
+
+# Dependency Injection 
+
+- Dependency injection is a design pattern that allows us to **Remove Hardcoded dependencies** and make our systems more loosely coupled
+
+
+
+- **Problem:** MyApplication class is responsible to initialize the email service and then use it.
+
+- This leads to hard-coded dependency. If we want to switch to some other advanced email service in the future, it will require code changes in MyApplication class. This makes our application hard to extend and if email service is used in multiple classes then that would be even harder.
+
+### Dependency Injection in java requires at least the following:
+
+1. Service components should be designed with base class or interface. It’s better to prefer interfaces or abstract classes that would define contract for the services.
+    This clearly explains the advantages of haivng an interface: 
+    
+    1. **Flexibility:** By using interfaces, you can easily swap out one implementation for another without changing the dependent classes. For example, you could have multiple implementations of PaymentService (e.g., CreditCardPaymentService, PaypalPaymentService).
+    2. **Decoupling:** The consumer classes (which use the service) do not depend on the concrete implementation of the service, only on the interface. This makes your code loosely coupled and more modular.
+    3. **Testability:** Using interfaces makes unit testing easier because you can mock or stub the service's behavior without relying on the actual implementation.
+
+2. Consumer classes should be written in terms of service interface.
+
+3. Injector classes that will initialize the services and then the consumer classes.
+    NOTE: injetor classes are usally part of frameworks such as spring
+
+# Microservices in Java ... Or how spring boot relates to micro Services
+
+
+? What is the diffrence between an interface and an abstract class in Java
