@@ -32,8 +32,15 @@ public class StudentController {
         StudentService.addNewStudent(student);
     }
 
+    @PutMapping(path = "{studentId}")
+    public void editStudent(@PathVariable("studentId") Long studentId){
+        StudentService.editStudent(studentId, "Micol");
+    }
+
     @DeleteMapping(path = "{studentId}")
     public void deleteStudent(@PathVariable("studentId") Long studentId){
         StudentService.deleteStudent(studentId);
     }
+
+    //TODO: add put functionality to be able to update name and email
 }

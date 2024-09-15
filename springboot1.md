@@ -1,33 +1,71 @@
-We will now structure  REST api 
+# Introduction to Spring Boot
 
-note: GET, POST, PUT, DELETE
+## Inversion of Control
+"Instead of the programmer deciding the flow of application this is handed over to the spring frame work"
+"In dependancy injeciton spring instanciates the object for us"
 
-The decorator looking things are called annotations in Java methods, they serve to provide information to a java program
+In simple terms **A bean is an instance of a class that is managed by the spring container**
+- some annotations make beans ???
+- 
+WHAT IS A SPRING CONTAINER?
+The spring container creates objects and manages
+The Container uses Dependency Injection(DI) to manage the components that make up the application. 
+It gets the information about the objects from a configuration file(XML) or Java Code or Java Annotations and Java POJO class.
 
-note that mehtod declarations MUST have a return type
+## Annotations in Java
+Annotations in Java methods provide metadata and information to a Java program. In Spring Boot, annotations are widely used to configure and manage the behavior of classes, methods, and fields.
 
+- **Note**: Method declarations MUST have a return type.
 
-We will now write the service layer, the service layer is responsible for the buisness logic
+## Service Layer in Spring Boot
+The service layer is responsible for the business logic of the application. It works in coordination with the controller to process incoming requests.
 
-look up  MVC (Model-View-Controller) architecture
-A controller is typically responsible for handling incoming HTTP requests, processing them (often with the help of services), and returning a response.
+- Look up MVC (Model-View-Controller) architecture.
+- A controller is typically responsible for handling incoming HTTP requests, processing them (often with the help of services), and returning a response.
 
-reminder the keyword `final` indicates a constant
+- **Reminder**: The keyword `final` indicates a constant.
 
-not sure about a lot of the concepts related to dependacy injections 
-# Dependency Injection
-- I looked at the car engine example
-- Include the dependency being passed into the constructor so Car is not tightly coupled to engine 
+## Dependency Injection
+I’m still trying to understand some concepts related to dependency injection.
 
-?? what is a sping bean ??
-A Spring Bean is an object that is managed by the Spring IoC (Inversion of Control) container. In the Spring Framework, the term "bean" refers to an object that is instantiated, assembled, and otherwise managed by Spring. Beans are the core building blocks of a Spring application, and the container is responsible for their lifecycle, including their creation, dependency injection, initialization, and eventual destruction.
+- I looked at the car engine example, where the dependency (e.g., `Engine`) is passed into the constructor so that `Car` is not tightly coupled to `Engine`.
 
-For the next section of the course we will look into the spring Data JPA
+### What is a Spring Bean?
+A Spring Bean is an object that is managed by the Spring IoC (Inversion of Control) container. In the Spring Framework, the term "bean" refers to an object that is instantiated, assembled, and managed by Spring. Beans are core building blocks in a Spring application.
 
+- The container is responsible for the bean lifecycle, including creation, dependency injection, initialization, and destruction.
 
-the language introduced records, which are a special kind of class designed to hold immutable data
+## Spring Data JPA
+<Introduction to Spring Data JPA>
 
-A library called jackson is used to deal with json in java 
+The next section will cover the integration of Spring Boot with Spring Data JPA, a library used for handling database interactions.
+
+## Records in Java
+Records are a special kind of class introduced in Java to hold immutable data.
+
+## Working with JSON in Java
+Jackson is a popular library used to serialize and deserialize JSON objects in Java.
+
+# Equals Method
+### 1. equals() Method
+The `equals()` method determines if two objects are meaningfully equivalent. By default, it compares object references (i.e., whether the two references point to the same object in memory). This behavior can be overridden to compare the state or content of objects.
+
+Example:
+
+```java
+public class Person {
+    private String name;
+    private int age;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return age == person.age && name.equals(person.name);
+    }
+}
+```
 
 # Equals method
 
@@ -131,3 +169,8 @@ This can lead to issues with version conflicts if you need to run different vers
 
 
 get a better understanding of how microservices work 
+
+# Generic Rest API notes
+We will now structure  REST api
+note: GET, POST, PUT, DELETE
+?? what is this diffrence between patch and put 
