@@ -37,13 +37,16 @@ public class StudentService
         studentRepository.save(student);
         System.out.println(student);
     }
+
     public void editStudent(Long studentId, String  newName){
         boolean exists = studentRepository.existsById(studentId);
         if (!exists){
             throw new IllegalStateException("Student with id " + studentId + " does not exist");
         }
         //TODO: change This
-        studentRepository.deleteById(studentId);
+        Student student = studentRepository.findById(studentId).orElseThrow(() -> new IllegalStateException("Student with id " + studentId + " does not exist"));;
+        student.setName(newName);
+        studentRepository.save(student);
     }
 
     public void deleteStudent(Long studentId){
