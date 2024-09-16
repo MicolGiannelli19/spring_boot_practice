@@ -43,8 +43,10 @@ public class StudentService
         if (!exists){
             throw new IllegalStateException("Student with id " + studentId + " does not exist");
         }
-        //TODO: change This
+        // Find element
         Student student = studentRepository.findById(studentId).orElseThrow(() -> new IllegalStateException("Student with id " + studentId + " does not exist"));;
+
+        // Set new value and save
         student.setName(newName);
         studentRepository.save(student);
     }

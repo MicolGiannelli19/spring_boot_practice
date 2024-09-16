@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import com.example.demo.student.Student;
 
 @RestController
@@ -33,8 +34,11 @@ public class StudentController {
     }
 
     @PutMapping(path = "{studentId}")
-    public void editStudent(@PathVariable("studentId") Long studentId){
-        StudentService.editStudent(studentId, "Micol");
+    public void editStudent(@PathVariable("studentId") Long studentId, @RequestBody Map<String, String> updates){
+        // How to better design this to have an optional amount of inputs
+        String newName = updates.get("newName");
+
+        StudentService.editStudent(studentId, newName);
     }
 
     @DeleteMapping(path = "{studentId}")
