@@ -1,5 +1,6 @@
 package com.example.demo.student;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -38,16 +39,34 @@ public class StudentService
         System.out.println(student);
     }
 
-    public void editStudent(Long studentId, String  newName){
-        boolean exists = studentRepository.existsById(studentId);
-        if (!exists){
-            throw new IllegalStateException("Student with id " + studentId + " does not exist");
-        }
-        // Find element
-        Student student = studentRepository.findById(studentId).orElseThrow(() -> new IllegalStateException("Student with id " + studentId + " does not exist"));;
+//    public void editStudent(Long studentId, String  newName){
+//        boolean exists = studentRepository.existsById(studentId);
+//        if (!exists){
+//            throw new IllegalStateException("Student with id " + studentId + " does not exist");
+//        }
+//        // Find element
+//        Student student = studentRepository.findById(studentId).orElseThrow(() -> new IllegalStateException("Student with id " + studentId + " does not exist"));;
+//
+//        // Set new value and save
+//        student.setName(newName);
+//        studentRepository.save(student);
+//    }
 
-        // Set new value and save
-        student.setName(newName);
+    // review the transactional annotation
+    @Transactional
+    public void updateStudent(Long studentId, String email, String name){
+
+        Student student = studentRepository.findById(studentId).orElseThrow( () -> new IllegalStateException("Student with id " + studentId + " does not exist"));
+
+        // Set new name if passed in
+        if (name != null && !name.isEmpty() && !name.equals(student.getName())){
+            student.setName(name);
+        }
+
+        // Set new name if passed in
+        if (email != null && !email.isEmpty() && !email.equals(student.getEmail())){
+            student.setEmail(email);
+        }
         studentRepository.save(student);
     }
 
